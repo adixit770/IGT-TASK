@@ -1,0 +1,340 @@
+{
+	"info": {
+		"_postman_id": "5af86e77-901b-40c9-ba46-51f1d19e6cce",
+		"name": "IGT Task Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21473830"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8008/api/addUser",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"aman\",\r\n\"email\":\"adixit770@gmail.com\",\r\n\"mobile\":\"9039826882\",\r\n\"password\":\"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8008/api/addUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8008",
+					"path": [
+						"api",
+						"addUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8008/api/loginUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData=pm.response.json();\r",
+							"pm.test(\"set the global value of master access token |set master AccessToken\",function () {\r",
+							"    pm.globals.set(\"Access_token\",jsonData.token)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"email\":\"adixit770@gmail.com\",\r\n\"password\":\"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8008/api/loginUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8008",
+					"path": [
+						"api",
+						"loginUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8008/api/getReview",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "{{Access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8008/api/getReview",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8008",
+					"path": [
+						"api",
+						"getReview"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8008/api/getReviewUser",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "{{Access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8008/api/getReviewUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8008",
+					"path": [
+						"api",
+						"getReviewUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8008/api/addReview",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "{{Access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "reviewTitle",
+							"value": "How to work with prototype design with adobe xd featuring tools",
+							"type": "text"
+						},
+						{
+							"key": "reviewStart",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "studentWatch",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "reviewImage",
+							"type": "file",
+							"src": "/D:/wallpaper/0e578f80daa6a11c39854d10f3e503b3.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8008/api/addReview",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8008",
+					"path": [
+						"api",
+						"addReview"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8008/api/userReview/0e578f80daa6a11c39854d10f3e503b3.jpg",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "{{Access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8008/api/userReview/0e578f80daa6a11c39854d10f3e503b3.jpg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8008",
+					"path": [
+						"api",
+						"userReview",
+						"0e578f80daa6a11c39854d10f3e503b3.jpg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8008/api/updateReview/6544c32e0e1deae3ca8ed761",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "{{Access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "reviewTitle",
+							"value": "Aman",
+							"type": "text"
+						},
+						{
+							"key": "reviewStart",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "studentWatch",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "reviewImage",
+							"type": "file",
+							"src": "/D:/wallpaper/1.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8008/api/updateReview/6544c32e0e1deae3ca8ed761",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8008",
+					"path": [
+						"api",
+						"updateReview",
+						"6544c32e0e1deae3ca8ed761"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
